@@ -1,0 +1,21 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "@material/tab-bar": "^13.0.0",
+    "darkmode-js": "^1.5.7",
+    "gulp": "^4.0.2",
+    "scss": "^0.2.4"
+  },
+  "devDependencies": {
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.43.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alkanoidev",
+  "license": "ISC"
+}

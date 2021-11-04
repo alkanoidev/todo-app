@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@100&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0px;
+  margin: 0px;
+  font-weight: bolder;
+}
+.light{
+  --background: #e5e5ed;
+  --text1: #5B5C61;
+  --text2: #000000;
+  --sortText: #4E6DB2;
+  --plusBg: #6A8ECA;
+  --unchecked: #4E6DB2;
+  --waveColor1: #38527E;
+  --waveColor2: #446090;
+  --waveColor3: #516FA3;
+  --waveColor4: #516FA3;
+  --waveColor4: #6A8ECA;
+  --cardColor: #eeeeee;
+}
+.dark{
+  --background: #2A2A3C;
+  --text1: #5B5C61;
+  --text2: #000000;
+  --sortText: #325897;
+  --plusBg: #325897;
+  --unchecked: #325897;
+  --waveColor1: #325897;
+  --waveColor2: #325897;
+  --waveColor3: #3964AB;
+  --waveColor4: #3D6AB5;
+  --waveColor4: #4071BF;
+  --cardColor: #eeeeee;
+}
+body {
+  background-color: var(--background);
+}
+body .container {
+  width: 100%;
+  padding-top: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+@media screen and (max-width: 425px) {
+  body .container {
+    padding-top: 80px;
+  }
+}
+body .container .wave {
+  z-index: -1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+body .container .wave svg {
+  width: 100%;
+}
+body .container main {
+  display: flex;
+  width: 35%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@media only screen and (max-width: 768px) {
+  body .container main {
+    width: 80%;
+  }
+}
+body .container main .newTodo {
+  background-color: var(--cardColor);
+  display: flex;
+  width: 100%;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+body .container main .newTodo input {
+  border: none;
+  background: var(--cardColor);
+  font-size: 16px;
+  width: 90%;
+}
+body .container main .newTodo input:focus {
+  outline: none;
+}
+body .container main .newTodo #plus {
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .container main .newTodo #plus svg path{
+  fill: var(--plusBg);
+}
+body .container main .newTodo #plus:hover {
+  cursor: pointer;
+}
+body .container main .options {
+  width: 100%;
+  margin: 20px 0px;
+  display: flex;
+  background: var(--cardColor);
+  border-radius: 10px;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+body .container main .options .sort {
+  display: flex;
+  flex-direction: row;
+}
+body .container main .options .sort h1 {
+  color: var(--sortText);
+  padding: 0px 20px;
+}
+@media only screen and (max-width: 425px) {
+  body .container main .options .sort h1 {
+    padding: 0px 0.2rem;
+  }
+}
+body .container main .options .sort h1:hover {
+  cursor: pointer;
+}
+body .container main .options h1 {
+  font-size: 14px;
+}
+body .container main .options #delete {
+  outline: none;
+  border: none;
+}
+body .container main .options #delete:hover {
+  cursor: pointer;
+}
+body .container main #TodoContainer {
+  width: 100%;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+.todo{
+  width: 100%;
+  height: 80px;
+  background-color: var(--cardColor);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+}
+.todoButton{
+  border: none;
+  margin-right: 20px;
+}
+#todoButton{
+  border: none;
+  margin-right: 20px;
+}
+.todoButton:hover{
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: var(--plusBg);
+  border-radius: 5px;
+}
+.crossed{
+  text-decoration: line-through;
+  color: #9D9FA4;
+}
+.messageContainer{
+  display: flex;
+  width: 100%;
+}

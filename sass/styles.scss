@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@100&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0px;
+  margin: 0px;
+  font-weight: bolder;
+}
+body {
+  background-color: #e5e5ed;
+  .container {
+    width: 100%;
+    padding-top: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    @media screen and(max-width:425px){
+        padding-top: 80px;
+    }
+    .wave {
+      z-index: -1;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      svg {
+        width: 100%;
+      }
+    }
+
+    main {
+      display: flex;
+      width: 35%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      @media only screen and(max-width: 768px) {
+          width: 80%;
+      }
+
+      .newTodo {
+        background-color: #eeeeee;
+        display: flex;
+        width: 100%;
+        height: 80px;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        input {
+          border: none;
+          background: #eeeeee;
+          font-size: 16px;
+        }
+        input:focus {
+          outline: none;
+        }
+
+        #plus {
+          border: none;
+          outline: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #plus:hover {
+          cursor: pointer;
+        }
+      }
+
+      .options {
+        width: 100%;
+        margin: 20px 0px;
+        display: flex;
+        background: #eeeeee;
+        border-radius: 10px;
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 20px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        
+        .sort {
+          display: flex;
+          flex-direction: row;
+          h1 {
+            color: #4e6db2;
+            padding: 0px 20px;
+            @media only screen and(max-width: 425px) {
+                padding: 0px 0.2rem;
+            }
+          }
+          h1:hover {
+            cursor: pointer;
+          }
+        }
+        h1 {
+          font-size: 14px;
+        }
+        #delete {
+          outline: none;
+          border: none;
+        }
+        #delete:hover {
+          cursor: pointer;
+        }
+      }
+      #TodoContainer{
+        width: 100%;
+        padding: 0px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
+}
