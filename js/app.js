@@ -1,21 +1,21 @@
 const inputTodo = document.getElementById("input");
 const addTodo = document.getElementById("plus");
 const itemsLeft = document.getElementById("itemsLeft");
+let numOfItems = 0;
 const deleteTodo = document.getElementById("delete");
 const todoList = document.getElementById("TodoContainer");
 const main = document.querySelector("main");
 const messageContainer = document.querySelector(".messageContainer");
-
 let todoLi = todoList.getElementsByClassName("todo");
 let todoData = [];
 let errorShown = false;
+let id = 0;
+
 const mode =
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 document.documentElement.classList = mode ? "dark" : "light";
-
-let id = 0;
 
 addTodo.onclick = () => {
   let text = inputTodo.value;
@@ -26,14 +26,14 @@ addTodo.onclick = () => {
     );
     errorShown = true;
   }
-  
   if (!(text == "")) {
-    todoList.appendChild(createTodo(text));
     let todoObj = {
       id: id,
       text: text,
       isDone: false,
     };
+    todoList.appendChild(createTodo(todoObj.text, todoObj.isDone));
+
     for (let index = 0; index < todoLi.length; index++) {
       const element = todoLi[index];
       const radioBtn = element.querySelector(".todoRadio");
@@ -47,7 +47,6 @@ addTodo.onclick = () => {
 
           const h1 = element.querySelector("h1");
           h1.classList.remove("crossed");
-          console.log(todoObj.isDone);
         } else {
           todoObj.isDone = true;
 
@@ -55,7 +54,6 @@ addTodo.onclick = () => {
 
           const h1 = element.querySelector("h1");
           h1.classList.add("crossed");
-          console.log(todoObj.isDone);
         }
       });
     }
@@ -81,7 +79,6 @@ inputTodo.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     const text = inputTodo.value;
     inputTodo.value = "";
-    todoList.appendChild(createTodo(text));
 
     if (!(text == "")) {
       let todoObj = {
@@ -89,6 +86,7 @@ inputTodo.addEventListener("keyup", (event) => {
         text: text,
         done: false,
       };
+      todoList.appendChild(createTodo(todoObj.text, todoObj.isDone));
       for (let index = 0; index < todoLi.length; index++) {
         const element = todoLi[index];
         const radioBtn = element.querySelector(".todoRadio");
@@ -102,7 +100,6 @@ inputTodo.addEventListener("keyup", (event) => {
 
             const h1 = element.querySelector("h1");
             h1.classList.remove("crossed");
-            console.log(todoObj.done);
           } else {
             todoObj.done = true;
 
@@ -110,7 +107,6 @@ inputTodo.addEventListener("keyup", (event) => {
 
             const h1 = element.querySelector("h1");
             h1.classList.add("crossed");
-            console.log(todoObj.done);
           }
         });
       }
@@ -120,11 +116,68 @@ inputTodo.addEventListener("keyup", (event) => {
   }
 });
 
+let deleteOptionShown = false;
+
 deleteTodo.onclick = () => {
   console.log("delete mode");
+
+  if (deleteOptionShown) {
+    deleteOptionShown = false;
+    for (let i = 0; i < todoLi.length; i++) {
+      const element = todoLi[i];
+      const button = document.getElementById("xbtn");
+      element.removeChild(button);
+    }
+  } else {
+    deleteOptionShown = true;
+    for (let i = 0; i < todoLi.length; i++) {
+      const element = todoLi[i];
+      const button = document.createElement("button");
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      const path1 = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+
+      svg.setAttribute("height", "36px");
+      svg.setAttribute("width", "36px");
+      svg.setAttribute("viewBox", "0 0 24 24");
+
+      svg.setAttribute("fill", "#E44545");
+
+      path.setAttribute("d", "M0 0h24v24H0V0z");
+      path.setAttribute("fill", "none");
+      path1.setAttribute(
+        "d",
+        "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+      );
+
+      button.style.border = "none";
+      button.style.cursor = "pointer";
+      button.style.marginLeft = "auto";
+      button.id = "xbtn";
+
+      svg.append(path);
+      svg.append(path1);
+      button.append(svg);
+      element.append(button);
+
+      button.onclick = () => {
+        element.remove();
+      };
+    }
+  }
+
+  // add x icon on the right of todo
+  // add onclick to remove with removeTodo()
+  // pop it from todoData
 };
 
-const createTodo = (text) => {
+const createTodo = (text, isDone) => {
   const li = document.createElement("li");
   const button = document.createElement("button");
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -153,7 +206,9 @@ const createTodo = (text) => {
   );
   path1.setAttribute("fill", "#4E6DB2");
   path1.setAttribute("id", "checkmark");
-  path1.style.display = "none";
+
+  path1.style.display = isDone ? "flex" : "none";
+
   h1.textContent = text;
   h1.style.fontSize = "18px";
   h1.style.overflow = "hidden"; // better way for this
@@ -169,18 +224,10 @@ const createTodo = (text) => {
   }
   li.classList = "todo";
 
-  return li;
-};
+  numOfItems++;
+  itemsLeft.textContent = `${numOfItems} items left`;
 
-const createCheckmarkPath = () => {
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute(
-    "d",
-    `M14 21.42L9 16.42L10.41 15.01L14 18.59L21.59 11L23 12.42L14 21.42Z`
-  );
-  path.setAttribute("fill", "#4E6DB2");
-  path.setAttribute("id", "path");
-  return path;
+  return li;
 };
 
 const createErrorMessage = (text) => {
@@ -214,3 +261,12 @@ const createErrorMessage = (text) => {
   message.appendChild(h1);
   return message;
 };
+
+const loadTodosFromArray = () => {
+  for (let i = 0; i < todoData.length; i++) {
+    const element = todoData[i];
+    todoList.appendChild(createTodo(element.text, element.isDone));
+  }
+};
+
+const removeTodo = () => {};

@@ -130,6 +130,9 @@ body .container main .options .sort h1 {
   body .container main .options .sort h1 {
     padding: 0px 0.2rem;
   }
+  body .container{
+    padding-top: 50px;
+  }
 }
 body .container main .options .sort h1:hover {
   cursor: pointer;
