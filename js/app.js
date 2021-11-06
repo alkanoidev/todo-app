@@ -163,7 +163,7 @@ const createTodo = (todoObj) => {
 
   li.appendChild(createRemoveBtn(li, todoObj));
   li.setAttribute("draggable", "true");
-  li.classList = "todo";
+  li.classList.add("todo");
 
   li.addEventListener("dragstart", () => {
     li.classList.add("dragging");
