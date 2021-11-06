@@ -1,8 +1,5 @@
 const inputTodo = document.getElementById("input");
 const addTodo = document.getElementById("plus");
-const itemsLeft = document.getElementById("itemsLeft");
-let numOfItems = 0;
-const deleteTodo = document.getElementById("delete");
 const todoList = document.getElementById("TodoContainer");
 const main = document.querySelector("main");
 const messageContainer = document.querySelector(".messageContainer");
@@ -32,7 +29,7 @@ addTodo.onclick = () => {
       text: text,
       isDone: false,
     };
-    todoList.appendChild(createTodo(todoObj.text, todoObj.isDone));
+    todoList.appendChild(createTodo(todoObj));
 
     for (let index = 0; index < todoLi.length; index++) {
       const element = todoLi[index];
@@ -43,17 +40,17 @@ addTodo.onclick = () => {
         if (todoObj.isDone) {
           todoObj.isDone = false;
 
-          checkmark.setAttribute("style", "display: none"); //differenet way for this
+          checkmark.setAttribute("style", "display: none");
 
-          const h1 = element.querySelector("h1");
-          h1.classList.remove("crossed");
+          const p = element.querySelector("p");
+          p.classList.remove("crossed");
         } else {
           todoObj.isDone = true;
 
           checkmark.setAttribute("style", "display: flex");
 
-          const h1 = element.querySelector("h1");
-          h1.classList.add("crossed");
+          const p = element.querySelector("p");
+          p.classList.add("crossed");
         }
       });
     }
@@ -86,7 +83,7 @@ inputTodo.addEventListener("keyup", (event) => {
         text: text,
         done: false,
       };
-      todoList.appendChild(createTodo(todoObj.text, todoObj.isDone));
+      todoList.appendChild(createTodo(todoObj));
       for (let index = 0; index < todoLi.length; index++) {
         const element = todoLi[index];
         const radioBtn = element.querySelector(".todoRadio");
@@ -96,17 +93,17 @@ inputTodo.addEventListener("keyup", (event) => {
           if (todoObj.done) {
             todoObj.done = false;
 
-            checkmark.setAttribute("style", "display: none"); //differenet way for this
+            checkmark.setAttribute("style", "display: none");
 
-            const h1 = element.querySelector("h1");
-            h1.classList.remove("crossed");
+            const p = element.querySelector("p");
+            p.classList.remove("crossed");
           } else {
             todoObj.done = true;
 
             checkmark.setAttribute("style", "display: flex");
 
-            const h1 = element.querySelector("h1");
-            h1.classList.add("crossed");
+            const p = element.querySelector("p");
+            p.classList.add("crossed");
           }
         });
       }
@@ -118,71 +115,12 @@ inputTodo.addEventListener("keyup", (event) => {
 
 let deleteOptionShown = false;
 
-deleteTodo.onclick = () => {
-  console.log("delete mode");
-
-  if (deleteOptionShown) {
-    deleteOptionShown = false;
-    for (let i = 0; i < todoLi.length; i++) {
-      const element = todoLi[i];
-      const button = document.getElementById("xbtn");
-      element.removeChild(button);
-    }
-  } else {
-    deleteOptionShown = true;
-    for (let i = 0; i < todoLi.length; i++) {
-      const element = todoLi[i];
-      const button = document.createElement("button");
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      const path = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-      );
-      const path1 = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-      );
-
-      svg.setAttribute("height", "36px");
-      svg.setAttribute("width", "36px");
-      svg.setAttribute("viewBox", "0 0 24 24");
-
-      svg.setAttribute("fill", "#E44545");
-
-      path.setAttribute("d", "M0 0h24v24H0V0z");
-      path.setAttribute("fill", "none");
-      path1.setAttribute(
-        "d",
-        "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
-      );
-
-      button.style.border = "none";
-      button.style.cursor = "pointer";
-      button.style.marginLeft = "auto";
-      button.id = "xbtn";
-
-      svg.append(path);
-      svg.append(path1);
-      button.append(svg);
-      element.append(button);
-
-      button.onclick = () => {
-        element.remove();
-      };
-    }
-  }
-
-  // add x icon on the right of todo
-  // add onclick to remove with removeTodo()
-  // pop it from todoData
-};
-
-const createTodo = (text, isDone) => {
+const createTodo = (todoObj) => {
   const li = document.createElement("li");
   const button = document.createElement("button");
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  const h1 = document.createElement("h1");
+  const p = document.createElement("p");
   const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
   svg.setAttribute("width", "32px");
@@ -206,12 +144,11 @@ const createTodo = (text, isDone) => {
   );
   path1.setAttribute("fill", "#4E6DB2");
   path1.setAttribute("id", "checkmark");
+  path1.style.display = todoObj.isDone ? "flex" : "none";
 
-  path1.style.display = isDone ? "flex" : "none";
-
-  h1.textContent = text;
-  h1.style.fontSize = "18px";
-  h1.style.overflow = "hidden"; // better way for this
+  p.textContent = todoObj.text;
+  p.style.fontSize = "18px";
+  p.style.padding = "20px 0px";
 
   svg.appendChild(path);
   svg.appendChild(path1);
@@ -219,16 +156,54 @@ const createTodo = (text, isDone) => {
   button.classList = "todoButton";
   button.setAttribute("name", "todoButton");
   li.appendChild(button);
-  if (text != "") {
-    li.appendChild(h1);
+
+  if (todoObj.text != "") {
+    li.appendChild(p);
   }
+
+  li.appendChild(createRemoveBtn(li, todoObj));
+  li.setAttribute("draggable", "true");
   li.classList = "todo";
 
-  numOfItems++;
-  itemsLeft.textContent = `${numOfItems} items left`;
+  li.addEventListener("dragstart", () => {
+    li.classList.add("dragging");
+  });
+
+  li.addEventListener("dragend", () => {
+    li.classList.remove("dragging");
+  });
 
   return li;
 };
+
+todoList.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  const afterElement = getDragAfterElement(e.clientY);
+  const todo = todoList.getElementsByClassName("dragging");
+  
+  if (afterElement == null) {
+    todoList.appendChild(todo[0]);
+  } else {
+    todoList.insertBefore(todo[0], afterElement);
+  }
+
+});
+
+const getDragAfterElement = (y) => {
+  const elements = [...todoList.querySelectorAll(".todo:not(.dragging)")];
+
+  return elements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y-box.top-box.height/2;
+
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    }else{
+      return closest;
+    }
+
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
 
 const createErrorMessage = (text) => {
   const message = document.createElement("div");
@@ -262,11 +237,36 @@ const createErrorMessage = (text) => {
   return message;
 };
 
-const loadTodosFromArray = () => {
-  for (let i = 0; i < todoData.length; i++) {
-    const element = todoData[i];
-    todoList.appendChild(createTodo(element.text, element.isDone));
-  }
-};
+const createRemoveBtn = (li, todoObj) => {
+  const button = document.createElement("button");
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
-const removeTodo = () => {};
+  svg.setAttribute("height", "36px");
+  svg.setAttribute("width", "36px");
+  svg.setAttribute("viewBox", "0 0 24 24");
+
+  svg.setAttribute("fill", "#de5f5f");
+
+  path.setAttribute("d", "M0 0h24v24H0V0z");
+  path.setAttribute("fill", "none");
+  path1.setAttribute(
+    "d",
+    "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+  );
+
+  button.style.border = "none";
+  button.style.cursor = "pointer";
+  button.style.marginLeft = "auto";
+
+  svg.append(path);
+  svg.append(path1);
+  button.append(svg);
+
+  button.onclick = () => {
+    li.remove();
+    todoData.splice(todoObj.id, 1);
+  };
+  return button;
+};

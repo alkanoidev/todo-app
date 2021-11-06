@@ -82,6 +82,7 @@ body .container main .newTodo {
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  margin-bottom: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 body .container main .newTodo input {
@@ -118,35 +119,6 @@ body .container main .options {
   padding: 0px 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-body .container main .options .sort {
-  display: flex;
-  flex-direction: row;
-}
-body .container main .options .sort h1 {
-  color: var(--sortText);
-  padding: 0px 20px;
-}
-@media only screen and (max-width: 425px) {
-  body .container main .options .sort h1 {
-    padding: 0px 0.2rem;
-  }
-  body .container{
-    padding-top: 50px;
-  }
-}
-body .container main .options .sort h1:hover {
-  cursor: pointer;
-}
-body .container main .options h1 {
-  font-size: 14px;
-}
-body .container main .options #delete {
-  outline: none;
-  border: none;
-}
-body .container main .options #delete:hover {
-  cursor: pointer;
-}
 body .container main #TodoContainer {
   width: 100%;
   padding: 0px 20px;
@@ -157,7 +129,7 @@ body .container main #TodoContainer {
 }
 .todo{
   width: 100%;
-  height: 80px;
+  height: fit-content;
   background-color: var(--cardColor);
   border-radius: 10px;
   display: flex;
@@ -197,5 +169,13 @@ body .container main #TodoContainer {
   display: flex;
   width: 100%;
 }
-
-
+.dragging{
+  width: 100%;
+  height: fit-content;
+  background-color: var(--cardColor);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  margin-bottom: 20px;
+}
