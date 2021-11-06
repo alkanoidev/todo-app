@@ -1,7 +1,5 @@
 # ToDoApp
 
-
-
 ## Overview
 [ToDoApp Live Site](https://alkanoidev.github.io/ToDoApp/)
 
@@ -14,40 +12,14 @@
 - Mobile-first workflow
 - Vanilla JavaScript
 - Drag and drop API
-- ![Mobile support for drag and drop]()
+- ![Mobile support for drag and drop](https://www.codeproject.com/Articles/1091766/Add-support-for-standard-HTML-Drag-and-Drop-operat)
 
-### 
-
-### Something I'm proud of:
-```js
-window.onload = () => {
-  preferences = localStorage.getItem("theme")==undefined ? 1 : localStorage.getItem("theme");
-  document.documentElement.className = `theme${preferences}`;
-  radios[Number(preferences)-1].checked=true;
-};
-```
-
-```js
-firstOperand = displayValue.split(operator)[0];
-secondOperand = displayValue.split(operator).pop();
-```
-
-```css
-.buttons {
-  display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
-  grid-template-areas:
-    ". . . ."
-    ". . . ."
-    ". . . ."
-    ". . . ."
-    "reset reset equals equals";
-  height: 600px;
-}
-```
+### Features  
+- Adding new to do when enter is pressed on input
+- Mathing the theme with system
+- Drag and drop to do items
+- Delete to do items
+- Set as done
 
 ## Author
 
