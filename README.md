@@ -15,7 +15,7 @@
 
 ### Features  
 - Adding new to do when enter is pressed on input
-- Mathing the theme with system
+- Matching the theme with system
 - Drag and drop to do items
 - Delete to do items
 - Set as done
