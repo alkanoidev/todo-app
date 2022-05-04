@@ -19,8 +19,3 @@
 - Drag and drop to do items
 - Delete to do items
 - Set as done
-
-## Author
-
-- Email - alkanoidev@gmail.com
-- @alkanoidev
