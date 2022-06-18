@@ -19,3 +19,10 @@
 - Drag and drop to do items
 - Delete to do items
 - Set as done
+
+### Author 👋
+
+ **Filip Ivanovic**
+
+* Website: [https://filipivanovic.netlify.app/](https://filipivanovic.netlify.app/)
+* Github: [@alkanoidev](https://github.com/alkanoidev)
