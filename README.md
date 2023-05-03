@@ -1,6 +1,6 @@
 # ToDoApp
 
-[ToDoApp Live Site](https://alkanoidev.github.io/ToDoApp/)
+[ToDoApp Live Site](https://alkanoidev.github.io/todo-app/)
 
 <code>![screenshot](https://github.com/alkanoidev/ToDoApp/blob/master/Screenshot%202021-11-06%20220613.png)</code>
 
